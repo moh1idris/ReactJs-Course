@@ -1,58 +1,73 @@
 
 import React from 'react'
-import { useState } from 'react'
+import { useState } from 'react';
+import { FaTrashAlt } from 'react-icons/fa'
 
 const Content = () => {
-   const [name, setName] = useState('Ajju');
-   const [count, setCount] = useState(0);
-    const handleNameChange = () => {
-        const names = ['Ajju' , 'job' , 'khob']
-        const int = Math.floor(Math.random() * 3)    //--> this will take random no from 0-3
-        setName(names[int])                          //--> as we are using useSate so we can edit this one itself
-     }     
-     
-   const handleClick =() =>{
-      setCount(count + 1);
-      console.log(count);
-     }
+   const [items, setItems] = useState([
+      // eslint-disable-next-line
+      {
+          id: 1,
+          checked: true,
+          item: "One half pound bag of Cocoa Covered Almonds Unsalted"
+      },
+      {
+          id: 2,
+          checked: false,
+          item: "Item 2"
+      },
+      {
+          id: 3,
+          checked: false,
+          item: "Item 3"
+      }
+  ]);
 
-    
+  const handleCheck = (id) => {
+   //   console.log(`key: ${id}`);          //--> this will change the id when u click on the button
+    const listItems = items.map((item) => item.id === id ? { ...item, 
+    checked: !item.checked } : item);       //--> here we are changing the status if the id maytches then change it to the cheked to false
+    setItems(listItems)
+    localStorage.setItem('shoppinglist', JSON.stringify(listItems))          //--> this is noting but we are storing it to the local storgae if anything we change wil l be same n localaastrage
+  }
 
-   // const handleNameChange = () => {
-   //    const names = ['Ajju' , 'job' , 'khob']
-   //    const int = Math.floor(Math.random() * 3)    //--> this will take random no from 0-3
-   //    return names[int];
-   // } 
-
-   //   const handleClick =() =>{
-   //    console.log('you clicked it ');
-   //   }
-
-   //   const handleClick2 =(name) =>{
-   //    console.log(`${name} was Clicked `);
-   //   }
-
-     const handleClick3 =(e) =>{                      //--> passing the event 
-      // console.log(e)                               //--> this will give the event object 
-      // console.log(e.target)                        //--><button>click it </button>
-      console.log(e.target.innerText)                 //--> click it 
-     }
-
+  const handleDelete = (id) =>{
+   // console.log(id);                  //--> this will show the id 
+   const listItems  = items.filter((item) => item.id !== id)          //--> this will create only the item with the id which are not eqaul to ittem.id
+   setItems(listItems)
+   localStorage.setItem('shoppinglist', JSON.stringify(listItems))          //--> this is noting but we are storing it to the local storgae if anything we change wil l be same n localaastrage
+  }
+   
   return (
     <main>
-       <p onDoubleClick={handleClick}>          {/* this will shoe in console a su will click o the name */}
-        {/* Hello {handleNameChange()}! */}
-        Hello {name}!
-       </p>
-       {/* <button onClick={handleClick}>Click it</button> */}
-       {/* when we do not passs parameter then use this  */}
-       {/* <button onClick={() => handleClick2('AJJU')}>Click it</button>
-       <button onClick={(e) => handleClick3(e)}>Click it</button>   this will give the object in which u will be having all the evenets  */}
+      {items.length ? (
+
+         <ul>
+                  {items.map((item) => (
+                     <li className='item' key={item.id}>
+                        <input 
+                        type="checkbox"
+                        onChange={() => handleCheck(item.id)}
+                        checked={item.checked} 
+                        />
+                           <label
+                           style={(item.checked) ? {textDecoration:
+                           'line-through'} : null }
+                           onDoubleClick={() => handleCheck(item.id)}          //--> double click on th ename it will get selected 
+                           >{item.item}</label>
+                           <FaTrashAlt 
+                           onClick={() => handleDelete(item.id)}
+                           role="button"
+                           tabIndex="0"/>
+                     </li>
+                  ))}
+               </ul>
 
 
-        {/* useSate */}
-       <button onClick={handleNameChange}>Change name</button>
-       <button onClick={handleClick}>Click it</button>
+      ) : (
+           <p style={{ marginTop: '2rem' }}>Your list is empty.</p>
+           )}
+       
     </main>
   )
 }
