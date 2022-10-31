@@ -2,21 +2,22 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // const name = "Ajju";      //-->adding it just to show how jsx works  
+  const handleNameChange = () => {
+     const names = ['bob' , 'job' , 'khob']
+     const int = Math.floor(Math.random() * 3)    //--> this will take random no from 0-3
+     return names[int];
+  }     
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to to changes.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+             <p>
+            Hello {handleNameChange()}!     {/*this willl give you the random name  */}
+             </p>
+       
+      
+        
       </header>
     </div>
   );
