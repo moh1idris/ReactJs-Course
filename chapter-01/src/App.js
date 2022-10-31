@@ -1,24 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Header';
+import Content from './Content';
+import Footer from './Footer';
 
 function App() {
-  // const name = "Ajju";      //-->adding it just to show how jsx works  
-  const handleNameChange = () => {
-     const names = ['bob' , 'job' , 'khob']
-     const int = Math.floor(Math.random() * 3)    //--> this will take random no from 0-3
-     return names[int];
-  }     
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-             <p>
-            Hello {handleNameChange()}!     {/*this willl give you the random name  */}
-             </p>
-       
-      
-        
-      </header>
+     <Header />
+     <Content />
+     <Footer />
     </div>
   );
 }
