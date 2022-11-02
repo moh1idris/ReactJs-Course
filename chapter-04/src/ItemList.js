@@ -36,10 +36,10 @@ const itemList = ({ items , handleCheck , handleDelete}) => {
     <ul>
       {items.map((item) => (
            <LineItem 
-              key={item.id}                                     //--> as we are getting an error so we added it 
-              item={item}
-              handleCheck={handleCheck}
-              handleDelete={handleDelete}
+             key={item.id}                                     //--> as we are getting an error so we added it 
+             item={item}
+             handleCheck={handleCheck}
+             handleDelete={handleDelete}
            />
       ))}
     </ul>

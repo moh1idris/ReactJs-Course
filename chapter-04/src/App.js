@@ -45,7 +45,7 @@ function App() {
       // console.log(newItem);  
       addItem(newItem)
       setNewItem('');
-    }
+      }
 
 
   return (
@@ -57,19 +57,16 @@ function App() {
        setNewItem={setNewItem}
        handleSubmit={handleSubmit}
      />
-
      <SearchItem 
        search={search}
        setSearch={setSearch}
      />
-
      <Content 
        items={items.filter(item => ((item.item).toLowerCase())
-        .includes(search.toLowerCase()))}                  //--> we are using it to search the items 
+        .includes(search.toLowerCase()))}
         handleCheck={handleCheck}
         handleDelete={handleDelete}
      />
-     
      <Footer length={items.length} />
     </div>
   );

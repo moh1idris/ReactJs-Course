@@ -15,8 +15,7 @@ function LineItem({ item , handleCheck , handleDelete}) {
                 style={(item.checked) ? {textDecoration:
                 'line-through'} : null }
                 onDoubleClick={() => handleCheck(item.id)}          //--> double click on th ename it will get selected 
-                >{item.item}
-            </label>
+            >{item.item}</label>
 
             <FaTrashAlt 
               onClick={() => handleDelete(item.id)}
@@ -24,7 +23,7 @@ function LineItem({ item , handleCheck , handleDelete}) {
               tabIndex="0"
               aria-label={`Delete ${item.item}`}
             />
-        </li>
+    </li>
   )
 }
 
